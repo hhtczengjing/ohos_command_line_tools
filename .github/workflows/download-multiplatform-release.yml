@@ -4,7 +4,42 @@ on:
   workflow_dispatch:
 
 jobs:
-  download-multiplatform:
+  download:
+    name: Download Platform Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect latest version
+        id: version
+        run: |
+          version_output=$(./scripts/detect-version.sh)
+          echo "$version_output" | grep "^version_file=" >> $GITHUB_OUTPUT
+          echo "$version_output" | grep "^build_version=" >> $GITHUB_OUTPUT
+
+      - name: Download platform files
+        id: download
+        run: ./scripts/download-platforms.sh "${{ steps.version.outputs.version_file }}" "${{ steps.version.outputs.build_version }}"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: platform-files
+          path: downloads/
+          retention-days: 7
+
+      - name: Download Summary
+        run: |
+          echo "## 📥 下载完成" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 已下载文件:" >> $GITHUB_STEP_SUMMARY
+          ls -1 downloads/ | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+
+  release:
+    name: Create Release
+    needs: download
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -29,10 +64,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Download platform files
+      - name: Download artifacts
         if: steps.check_release.outputs.release_exists == 'false'
-        id: download
-        run: ./scripts/download-platforms.sh "${{ steps.version.outputs.version_file }}" "${{ steps.version.outputs.build_version }}"
+        uses: actions/download-artifact@v4
+        with:
+          name: platform-files
+          path: downloads/
 
       - name: Generate Release Notes
         if: steps.check_release.outputs.release_exists == 'false'
@@ -56,7 +93,7 @@ jobs:
         if: success() && steps.check_release.outputs.release_exists == 'false'
         run: |
           build_version="${{ steps.version.outputs.build_version }}"
-          echo "## ✅ 多平台 Release 发布成功" >> $GITHUB_STEP_SUMMARY
+          echo "## ✅ Release 发布成功" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 发布信息" >> $GITHUB_STEP_SUMMARY
           echo "- **构建版本**: \`$build_version\`" >> $GITHUB_STEP_SUMMARY

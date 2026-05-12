@@ -14,12 +14,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CONFIG_FILE = path.join(__dirname, 'config.json');
 const VERSIONS_DIR = path.join(__dirname, '../versions');
 
-// 平台映射关系
-const PLATFORM_MAP = {
-  'windows-x64': 'Windows (64-bit)',
-  'linux-x86': 'Linux (x86)',
-  'macos-x86': 'macOS (x86)',
-  'macos-arm64': 'macOS (ARM)'
+// 平台映射关系 - 根据 osType 映射
+const OS_TYPE_MAP = {
+  1: 'windows-x64',
+  2: 'linux-x86',
+  3: 'macos-x86',
+  4: 'macos-arm64'
 };
 
 // 从环境变量或配置文件读取 Cookie
@@ -135,75 +135,78 @@ async function syncVersions() {
       process.exit(1);
     }
 
-    const versions = versionTypeList[0]?.versionList || [];
-    console.log(`📦 处理 ${versions.length} 个版本...\n`);
+    // 创建一个映射，按 buildVersion 汇总来自所有 osType 的包
+    const versionMap = new Map();
 
-    for (const version of versions) {
-      const buildVersion = version.buildVersion;
-      console.log(`📝 处理版本: ${buildVersion}`);
+    // 遍历所有 versionTypeList（每个对应一个平台/osType）
+    for (const versionType of versionTypeList) {
+      const osType = versionType.osType;
+      const platformId = OS_TYPE_MAP[osType];
 
-      const versionData = {
-        versionName: version.versionName,
-        buildVersion: version.buildVersion,
-        publishTime: version.publishTime,
-        versionId: version.versionId,
-        platforms: {}
-      };
-
-      const packageList = version.packageList || [];
-
-      for (const pkg of packageList) {
-        // 匹配平台 ID
-        let platformId = null;
-        for (const [id] of Object.entries(PLATFORM_MAP)) {
-          if (pkg.packageName.includes(id.replace('-', '_')) || pkg.packageName.includes(id)) {
-            platformId = id;
-            break;
-          }
-          // 特殊处理
-          if (id === 'windows-x64' && pkg.packageName.includes('windows-x64')) platformId = id;
-          if (id === 'linux-x86' && pkg.packageName.includes('linux')) platformId = id;
-          if (id === 'macos-x86' && pkg.packageName.includes('mac-x64')) platformId = id;
-          if (id === 'macos-arm64' && pkg.packageName.includes('arm64')) platformId = id;
-        }
-
-        if (!platformId) {
-          console.warn(`   ⚠️  无法识别平台: ${pkg.packageName}`);
-          continue;
-        }
-
-        console.log(`   ⏳ 正在获取 ${platformId} 的下载 URL...`);
-
-        try {
-          const downloadUrl = await getDownloadUrl(pkg.sdkId, version.versionId, pkg.packageId);
-
-          versionData.platforms[platformId] = {
-            showName: pkg.showName,
-            packageName: pkg.packageName,
-            downloadUrl: downloadUrl || '',
-            sha256: pkg.sha256,
-            packageSize: pkg.packageSize,
-            sdkId: pkg.sdkId,
-            packageId: pkg.packageId
-          };
-
-          console.log(`   ✅ ${platformId}: 获取成功`);
-        } catch (error) {
-          console.warn(`   ❌ ${platformId}: ${error.message}`);
-          // 继续处理其他平台
-        }
-
-        // 避免请求过快，等待 500ms
-        await new Promise(resolve => setTimeout(resolve, 500));
+      if (!platformId) {
+        console.warn(`⚠️  未知的 osType: ${osType}，跳过`);
+        continue;
       }
 
-      // 保存版本文件
-      const versionFile = path.join(VERSIONS_DIR, `${buildVersion}.json`);
-      fs.writeFileSync(versionFile, JSON.stringify(versionData, null, 2));
-      console.log(`   💾 已保存到: ${versionFile}\n`);
+      const versionList = versionType.versionList || [];
+      console.log(`📱 处理 osType=${osType} (${platformId}): ${versionList.length} 个版本`);
+
+      for (const version of versionList) {
+        const buildVersion = version.buildVersion;
+
+        // 如果版本还未在 map 中，则创建新条目
+        if (!versionMap.has(buildVersion)) {
+          versionMap.set(buildVersion, {
+            versionName: version.versionName,
+            buildVersion: version.buildVersion,
+            publishTime: version.publishTime,
+            versionId: version.versionId,
+            platforms: {}
+          });
+        }
+
+        const versionData = versionMap.get(buildVersion);
+        const packageList = version.packageList || [];
+
+        for (const pkg of packageList) {
+          console.log(`   ⏳ 正在获取 ${platformId} 的下载 URL (${buildVersion})...`);
+
+          try {
+            const downloadUrl = await getDownloadUrl(pkg.sdkId, version.versionId, pkg.packageId);
+
+            versionData.platforms[platformId] = {
+              showName: pkg.showName,
+              packageName: pkg.packageName,
+              downloadUrl: downloadUrl || '',
+              sha256: pkg.sha256,
+              packageSize: pkg.packageSize,
+              sdkId: pkg.sdkId,
+              packageId: pkg.packageId
+            };
+
+            console.log(`   ✅ ${platformId}: 获取成功`);
+          } catch (error) {
+            console.warn(`   ❌ ${platformId}: ${error.message}`);
+            // 继续处理其他平台
+          }
+
+          // 避免请求过快，等待 500ms
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+      }
     }
 
-    console.log('✅ 版本同步完成！');
+    // 保存所有版本文件
+    console.log(`\n💾 保存版本文件...`);
+    let savedCount = 0;
+    for (const [buildVersion, versionData] of versionMap) {
+      const versionFile = path.join(VERSIONS_DIR, `${buildVersion}.json`);
+      fs.writeFileSync(versionFile, JSON.stringify(versionData, null, 2));
+      console.log(`   ✅ ${buildVersion} (${Object.keys(versionData.platforms).length} 个平台)`);
+      savedCount++;
+    }
+
+    console.log(`\n✅ 版本同步完成！共保存 ${savedCount} 个版本`);
   } catch (error) {
     console.error(`❌ 同步失败: ${error.message}`);
     process.exit(1);
