@@ -7,34 +7,34 @@
     "windows-x64": {
       "showName": "Command Line Tools for Windows 5.0.3.906",
       "packageName": "commandline-tools-windows-x64-5.0.3.906.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/6e/v3/BThTNMu4S4uoDAdOaNwHfw/commandline-tools-windows-x64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T103023Z&HW-CC-Expire=315360000&HW-CC-Sign=E8A37CC3AB6814FFAAEEE6B494DBD539BB38B04C8F84C7981607EF90F5B2A64A",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/6e/v3/BThTNMu4S4uoDAdOaNwHfw/commandline-tools-windows-x64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T134904Z&HW-CC-Expire=315360000&HW-CC-Sign=B257B58CCF9932690D0234578A3FACD4C290791B6F389343A5D497606C5FE074",
       "sha256": "f11129b0f4832a00c376ec8657919258552dad46d50657b15a12ae4c8980dd61",
       "packageSize": "2490026889",
       "sdkId": "0d2dc4ecf05043ab836b550cea2b04fe",
       "packageId": "101766718413740045"
     },
-    "macos-arm64": {
+    "linux-x64": {
       "showName": "Command Line Tools for Linux(x86) 5.0.3.906",
       "packageName": "commandline-tools-linux-x64-5.0.3.906.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/b8/v3/D1h9RzdeTZ-7Ga_hPu95DA/commandline-tools-linux-x64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T103036Z&HW-CC-Expire=315360000&HW-CC-Sign=B41CD6F8C19642286255EEBA022F991BD613BF7545F715B11D19155D16436AC6",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/b8/v3/D1h9RzdeTZ-7Ga_hPu95DA/commandline-tools-linux-x64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T134915Z&HW-CC-Expire=315360000&HW-CC-Sign=1DD05CD0E9329EBA110D0FD08EC34265251D7D6FDF5215C1ABC4FB69C7C638E6",
       "sha256": "c6fe61299e1b05e4023e643a319ee74c3eb369af7edecd5c3f1795b16f9db6af",
       "packageSize": "3225154486",
       "sdkId": "5d64470b77cc4be28e4848fa78697143",
       "packageId": "101766718413740046"
     },
-    "linux-x86": {
+    "macos-x86": {
       "showName": "Command Line Tools for Mac(x86) 5.0.3.906",
       "packageName": "commandline-tools-mac-x64-5.0.3.906.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/ad/v3/LLKHYSPHR9SseO_5UDpz3Q/commandline-tools-mac-x64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T103048Z&HW-CC-Expire=315360000&HW-CC-Sign=1CFE5AE1EF3D58A769425B70BC5B97336671E2C562334D073366D0251DA233B1",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/ad/v3/LLKHYSPHR9SseO_5UDpz3Q/commandline-tools-mac-x64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T134927Z&HW-CC-Expire=315360000&HW-CC-Sign=EADEC4BAD57EC862B63CE3550F322E1E78332849FFF0A6E386E56613E6125240",
       "sha256": "05b3beba87ac0a189d2e0e0dd8f524839c5fc6b38b1058cf536335c3f3b3858a",
       "packageSize": "2571638300",
       "sdkId": "39d0d24c197e44deb8d7f762943aded2",
       "packageId": "101766718413740047"
     },
-    "macos-x86": {
+    "macos-arm64": {
       "showName": "Command Line Tools for Mac(ARM) 5.0.3.906",
       "packageName": "commandline-tools-mac-arm64-5.0.3.906.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/2/v3/xsA4rpiIT92v8v3uwHBqjw/commandline-tools-mac-arm64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T103100Z&HW-CC-Expire=315360000&HW-CC-Sign=853B0DC5E6A3EC5F7EF987C9C2B20DBC2E0309C2EC592CD1479BB7213D54827C",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/2/v3/xsA4rpiIT92v8v3uwHBqjw/commandline-tools-mac-arm64-5.0.3.906.zip?HW-CC-KV=V1&HW-CC-Date=20260512T134938Z&HW-CC-Expire=315360000&HW-CC-Sign=5D7FD48860BF62DDC72B31A7690B39473478D9F9F1B52B51EEC33FBB86C13C0E",
       "sha256": "ccee77a6c7348a02373333a83420332832487016bd4aecc1b44a14b80924db89",
       "packageSize": "2342221575",
       "sdkId": "1fc2b4d064af45ca9e6d34702166f3e7",
