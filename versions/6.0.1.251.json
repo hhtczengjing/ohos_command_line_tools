@@ -1,0 +1,40 @@
+{
+  "versionName": "Command Line Tools 6.0.1 Release",
+  "buildVersion": "6.0.1.251",
+  "publishTime": "2025-11-24 11:39:46",
+  "versionId": "701764589354367036",
+  "platforms": {
+    "windows-x64": {
+      "showName": "Command Line Tools for Windows 6.0.1.251",
+      "packageName": "commandline-tools-windows-x64-6.0.1.251.zip",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/fc/v3/vbfrDDO6T9S5q803hKS_tQ/commandline-tools-windows-x64-6.0.1.251.zip.asc?HW-CC-KV=V1&HW-CC-Date=20251201T114234Z&HW-CC-Expire=315360000000&HW-CC-Sign=F4A52A1A0860E8D8EAAAA089E502F63A9C164489A751FF419E9BC68109D5CD55",
+      "sha256": "fced75a65e23d0fdbb76123a854f83232c361971b027f69befdafd243c2dec32",
+      "packageSize": "2478534869",
+      "sdkId": "ec74245c3152495aa4b0b8f94957718d"
+    },
+    "linux-x86": {
+      "showName": "Command Line Tools for Linux(x86) 6.0.1.251",
+      "packageName": "commandline-tools-linux-x64-6.0.1.251.zip",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/1b/v3/fpXvafAwTuyE6FhDLFrAaw/commandline-tools-linux-x64-6.0.1.251.zip.asc?HW-CC-KV=V1&HW-CC-Date=20251201T114234Z&HW-CC-Expire=315360000000&HW-CC-Sign=BBA916D25B945FEFDDCD48F3BEF6BE763D609607AB738325592A6B93B90B0427",
+      "sha256": "e971348eabe959b41b1d07fae037b3cc53ab2c0a8306f0895357dd45f98ad421",
+      "packageSize": "2108510902",
+      "sdkId": "83cbbba285e24cc1a7ebb690d4377bff"
+    },
+    "macos-x86": {
+      "showName": "Command Line Tools for Mac(x86) 6.0.1.251",
+      "packageName": "commandline-tools-mac-x64-6.0.1.251.zip",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/63/v3/5UQfYfDtSSWDdvHOL8UZwQ/commandline-tools-mac-x64-6.0.1.251.zip.asc?HW-CC-KV=V1&HW-CC-Date=20251201T114234Z&HW-CC-Expire=315360000000&HW-CC-Sign=024C160CB870DE9EA516C5D848B7AAD11FDF0BA1763103BBFE1613DDA3BF21E8",
+      "sha256": "883ad8735244f54750060263c19249ce7e3a9d0392d9b478a4c1701427e7a1dc",
+      "packageSize": "1999057221",
+      "sdkId": "2ad34122fd04499c8b779db549cd5323"
+    },
+    "macos-arm64": {
+      "showName": "Command Line Tools for Mac(ARM) 6.0.1.251",
+      "packageName": "commandline-tools-mac-arm64-6.0.1.251.zip",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/b5/v3/PStBMEmeTw28MeIL1TdRhg/commandline-tools-mac-arm64-6.0.1.251.zip.asc?HW-CC-KV=V1&HW-CC-Date=20251201T114234Z&HW-CC-Expire=315360000000&HW-CC-Sign=03CFB06BDD217246E3031FA06E33D238FD5C72BC6EED40824CDDA1EDAA7FAB5C",
+      "sha256": "9c10511d23d6a0ae597c4238e45b1f2d8730a62a93a2bf96fca3d92837733fc0",
+      "packageSize": "1895212126",
+      "sdkId": "838eb1bb54e748fb8d9d88f87943a404"
+    }
+  }
+}
