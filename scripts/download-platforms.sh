@@ -14,15 +14,13 @@ version_file="$1"
 build_version="$2"
 mkdir -p downloads
 
-echo "## 平台文件下载进度" > download_summary.md
-echo "" >> download_summary.md
-
 # 初始化计数器
 total_platforms=0
 successful_platforms=0
 
 # 读取版本 JSON 文件中的平台列表
-jq -r '.platforms | to_entries[] | "\(.key)|\(.value.showName // .key)|\(.value.downloadUrl)|\(.value.packageName)|\(.value.sha256)"' "$version_file" | while IFS='|' read -r platform_id platform_name url package_name expected_sha256; do
+# 使用进程替换 (< <(...)) 而不是管道 (|) 来避免子 shell 问题
+while IFS='|' read -r platform_id platform_name url package_name expected_sha256; do
   if [ -z "$url" ]; then
     continue
   fi
@@ -39,7 +37,7 @@ jq -r '.platforms | to_entries[] | "\(.key)|\(.value.showName // .key)|\(.value.
   download_success=false
 
   while [ $attempt -le $max_attempts ]; do
-    if curl -L -o "downloads/$output_filename" "$url" 2>/dev/null; then
+    if curl -# -L -o "downloads/$output_filename" "$url"; then
       download_success=true
       break
     fi
@@ -59,8 +57,6 @@ jq -r '.platforms | to_entries[] | "\(.key)|\(.value.showName // .key)|\(.value.
       echo "   期望: $expected_sha256"
       echo "   实际: $actual_sha256"
       rm "downloads/$output_filename"
-      echo "- ❌ **$platform_name** ($platform_id): SHA256 校验失败" >> download_summary.md
-      echo "$platform_name ($platform_id): SHA256 校验失败" >> failed_list.txt
     else
       ((successful_platforms++))
       filesize=$(du -h "downloads/$output_filename" | cut -f1)
@@ -68,26 +64,11 @@ jq -r '.platforms | to_entries[] | "\(.key)|\(.value.showName // .key)|\(.value.
       if [ -n "$expected_sha256" ]; then
         echo "✅ SHA256 校验通过"
       fi
-      echo "$output_filename" >> file_list.txt
-      if [ -n "$expected_sha256" ]; then
-        echo "- ✅ **$platform_name** ($platform_id): $output_filename - $filesize (SHA256 ✓)" >> download_summary.md
-      else
-        echo "- ✅ **$platform_name** ($platform_id): $output_filename - $filesize" >> download_summary.md
-      fi
     fi
   else
     echo "❌ 下载失败: $url"
-    echo "- ❌ **$platform_name** ($platform_id): 下载失败" >> download_summary.md
-    echo "$platform_name ($platform_id): 下载失败" >> failed_list.txt
   fi
-done
-
-# 写入平台统计信息
-echo "" >> download_summary.md
-echo "## 统计信息" >> download_summary.md
-echo "- 总平台数: $total_platforms" >> download_summary.md
-echo "- 成功: $successful_platforms" >> download_summary.md
-echo "- 失败: $((total_platforms - successful_platforms))" >> download_summary.md
+done < <(jq -r '.platforms | to_entries[] | "\(.key)|\(.value.showName // .key)|\(.value.downloadUrl)|\(.value.packageName)|\(.value.sha256)"' "$version_file")
 
 echo ""
 echo "📊 统计信息:"
@@ -99,11 +80,7 @@ echo ""
 # 检查是否有任何平台失败
 if [ "$successful_platforms" -ne "$total_platforms" ]; then
   echo "❌ 错误: 部分平台下载失败"
-  echo ""
-  cat download_summary.md
   exit 1
 fi
 
 echo "✅ 下载完成"
-echo ""
-cat download_summary.md
