@@ -3,12 +3,12 @@
   "version": "3.0.0",
   "description": "Version link synchronization system for OHOS Command Line Tools",
   "type": "module",
-  "main": "sync/fetch-config.js",
+  "main": "fetch-config.js",
   "scripts": {
-    "sync": "cd sync && node fetch-config.js && node sync-versions.js && node update-version.js",
-    "fetch": "cd sync && node fetch-config.js",
-    "sync-versions": "cd sync && node sync-versions.js",
-    "update-version": "cd sync && node update-version.js"
+    "sync": "node fetch-config.js && node sync-versions.js && node update-version.js",
+    "fetch": "node fetch-config.js",
+    "sync-versions": "node sync-versions.js",
+    "update-version": "node update-version.js"
   },
   "keywords": [
     "ohos",
