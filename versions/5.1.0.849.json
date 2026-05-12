@@ -7,34 +7,38 @@
     "windows-x64": {
       "showName": "Command Line Tools for Windows 5.1.0.849",
       "packageName": "commandline-tools-windows-x64-5.1.0.849.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/ea/v3/SKq6vGKjT32W_tr0QyOUiA/commandline-tools-windows-x64-5.1.0.849.zip.asc?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=56A9F422CA802989CE820FFEE8CDEB56A0B2240DF975DBB124CBEEC1C7D9E339",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/ea/v3/SKq6vGKjT32W_tr0QyOUiA/commandline-tools-windows-x64-5.1.0.849.zip?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=56A9F422CA802989CE820FFEE8CDEB56A0B2240DF975DBB124CBEEC1C7D9E339",
       "sha256": "69cbbe63583eb542407eaccac29b12cb752295a21385ade5b0e4c45f076eb984",
       "packageSize": "2563233550",
-      "sdkId": "b86811b24ca24b10b8bff6b015a1cea7"
+      "sdkId": "b86811b24ca24b10b8bff6b015a1cea7",
+      "packageId": "231766717926470069"
     },
     "linux-x86": {
       "showName": "Command Line Tools for Linux(x86) 5.1.0.849",
       "packageName": "commandline-tools-linux-x64-5.1.0.849.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/fe/v3/WnK9kw9cSeO07MIUF4hjsQ/commandline-tools-linux-x64-5.1.0.849.zip.asc?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=DC6319BB18D458EFE84DD939C332ADA6C0241F85CB65073656A52BB1A4E2C758",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/fe/v3/WnK9kw9cSeO07MIUF4hjsQ/commandline-tools-linux-x64-5.1.0.849.zip?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=DC6319BB18D458EFE84DD939C332ADA6C0241F85CB65073656A52BB1A4E2C758",
       "sha256": "5812c51b01e4fcd027714209a74a19aa5e075c5097d106350b1676dffc1cc89a",
       "packageSize": "2153491609",
-      "sdkId": "0d1b37c84117474792adba331d49594b"
+      "sdkId": "0d1b37c84117474792adba331d49594b",
+      "packageId": "231766717926470070"
     },
     "macos-x86": {
       "showName": "Command Line Tools for Mac(x86) 5.1.0.849",
       "packageName": "commandline-tools-mac-x64-5.1.0.849.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/21/v3/4ocNJ0tdRNG9W2Wr8HbfJw/commandline-tools-mac-x64-5.1.0.849.zip.asc?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=5BECAA325F09AF9BB62CAC8B913A3FF6FC84A9AE55D82DF90C86155949E75EB7",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/21/v3/4ocNJ0tdRNG9W2Wr8HbfJw/commandline-tools-mac-x64-5.1.0.849.zip?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=5BECAA325F09AF9BB62CAC8B913A3FF6FC84A9AE55D82DF90C86155949E75EB7",
       "sha256": "e38f4a616e1aa3fcdc1f2191fd088da93f5f0423a7ea573903ac836b141f1088",
       "packageSize": "1986029838",
-      "sdkId": "c6ad069888ad4cfc81d5cf00435dcd2a"
+      "sdkId": "c6ad069888ad4cfc81d5cf00435dcd2a",
+      "packageId": "231766717926470071"
     },
     "macos-arm64": {
       "showName": "Command Line Tools for Mac(ARM) 5.1.0.849",
       "packageName": "commandline-tools-mac-arm64-5.1.0.849.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/b/v3/cGBf9bF3QVe1OrrEvwJyKA/commandline-tools-mac-arm64-5.1.0.849.zip.asc?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=D73EDD15D5CD050E9ADC90B42E8C4619DE935A71E0E21A5E22A2C0FE44F40FD2",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/b/v3/cGBf9bF3QVe1OrrEvwJyKA/commandline-tools-mac-arm64-5.1.0.849.zip?HW-CC-KV=V1&HW-CC-Date=20250814T124749Z&HW-CC-Expire=315360000000&HW-CC-Sign=D73EDD15D5CD050E9ADC90B42E8C4619DE935A71E0E21A5E22A2C0FE44F40FD2",
       "sha256": "c89f19f0f192a185149374fc395b541761968d63be75d942fba17da48bc6e00f",
       "packageSize": "1895213039",
-      "sdkId": "2a327720ec27456d8a2d4a9655a96bdf"
+      "sdkId": "2a327720ec27456d8a2d4a9655a96bdf",
+      "packageId": "231766717926470072"
     }
   }
 }
