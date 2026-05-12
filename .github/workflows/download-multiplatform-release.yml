@@ -63,11 +63,7 @@ jobs:
           echo "- **版本文件**: \`${{ steps.version.outputs.version_file }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 上传的文件:" >> $GITHUB_STEP_SUMMARY
-          if [ -f file_list.txt ]; then
-            cat file_list.txt | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
-          fi
-          echo "" >> $GITHUB_STEP_SUMMARY
-          cat download_summary.md >> $GITHUB_STEP_SUMMARY
+          ls -1 downloads/ | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
 
       - name: Release Already Exists Summary
         if: steps.check_release.outputs.release_exists == 'true'
@@ -89,8 +85,3 @@ jobs:
           echo "- 检查 **versions/** 目录中是否存在版本 JSON 文件" >> $GITHUB_STEP_SUMMARY
           echo "- 检查版本 JSON 文件中的下载链接是否有效" >> $GITHUB_STEP_SUMMARY
           echo "- 查看完整日志获取更多信息" >> $GITHUB_STEP_SUMMARY
-          if [ -f download_summary.md ]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### 下载摘要" >> $GITHUB_STEP_SUMMARY
-            cat download_summary.md >> $GITHUB_STEP_SUMMARY
-          fi

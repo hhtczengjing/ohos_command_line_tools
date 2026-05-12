@@ -6,6 +6,7 @@ yarn.lock
 # Generated files
 downloads/
 config.json
+sync/config.json
 download_summary.md
 file_list.txt
 release_notes.md

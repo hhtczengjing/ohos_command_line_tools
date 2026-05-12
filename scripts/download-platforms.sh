@@ -2,8 +2,6 @@
 # 多平台文件下载脚本
 # 用法: ./scripts/download-platforms.sh <version_file> <build_version>
 
-set -e
-
 if [ -z "$1" ] || [ -z "$2" ]; then
   echo "❌ 错误: 缺少必需参数"
   echo "用法: ./scripts/download-platforms.sh <version_file> <build_version>"
@@ -17,6 +15,18 @@ mkdir -p downloads
 # 初始化计数器
 total_platforms=0
 successful_platforms=0
+
+# 验证版本文件是否存在
+if [ ! -f "$version_file" ]; then
+  echo "❌ 错误: 版本文件不存在: $version_file"
+  exit 1
+fi
+
+# 验证 JSON 格式
+if ! jq empty "$version_file" 2>/dev/null; then
+  echo "❌ 错误: 版本文件不是有效的 JSON: $version_file"
+  exit 1
+fi
 
 # 读取版本 JSON 文件中的平台列表
 # 使用进程替换 (< <(...)) 而不是管道 (|) 来避免子 shell 问题
@@ -37,7 +47,7 @@ while IFS='|' read -r platform_id platform_name url package_name expected_sha256
   download_success=false
 
   while [ $attempt -le $max_attempts ]; do
-    if curl -# -L -o "downloads/$output_filename" "$url"; then
+    if curl -# -L -o "downloads/$output_filename" "$url" 2>&1; then
       download_success=true
       break
     fi
@@ -76,6 +86,12 @@ echo "   总平台数: $total_platforms"
 echo "   成功: $successful_platforms"
 echo "   失败: $((total_platforms - successful_platforms))"
 echo ""
+
+# 检查是否发现了任何平台
+if [ "$total_platforms" -eq 0 ]; then
+  echo "❌ 错误: 未从版本文件中发现任何平台"
+  exit 1
+fi
 
 # 检查是否有任何平台失败
 if [ "$successful_platforms" -ne "$total_platforms" ]; then

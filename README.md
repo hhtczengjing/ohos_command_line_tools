@@ -29,30 +29,30 @@ ohos_command_line_tools/
 
 ## 🚀 快速开始
 
-### 步骤 1: 添加版本数据
+### 步骤 1: 配置华为 Cookie
 
-在 `versions/` 目录中创建 JSON 文件（文件名: `{buildVersion}.json`）：
+首先获取有效的华为开发者 Cookie，然后在 `.github/huawei-api-config.txt` 中配置（参考 `.github/huawei-api-config.txt.example`）。
 
-```json
-{
-  "versionName": "Command Line Tools 6.1.1 Beta1",
-  "buildVersion": "6.1.1.268",
-  "publishTime": "2026-04-30 01:17:18",
-  "platforms": {
-    "windows-x64": {
-      "showName": "Command Line Tools for Windows 6.1.1.268",
-      "packageName": "commandline-tools-windows-x64-6.1.1.268.zip",
-      "downloadUrl": "https://your-domain.com/releases/commandline-tools-windows-x64-6.1.1.268.zip",
-      "sha256": "40cc0d9d677406f6f8f2704107dcff89e36ed271ead357db5cef62501473f37e"
-    },
-    "linux-x86": { ... },
-    "macos-x86": { ... },
-    "macos-arm64": { ... }
-  }
-}
+### 步骤 2: 同步版本信息
+
+在 `sync` 目录中运行同步脚本：
+
+```bash
+cd sync
+
+# 方式 1: 一键同步（推荐）
+./auto-sync.sh
+
+# 方式 2: 分步执行
+node fetch-config.js      # 获取版本列表
+node sync-versions.js     # 同步版本并获取下载链接
 ```
 
-### 步骤 2: 触发 Workflow
+这会：
+1. 从华为 API 获取最新版本列表 → 生成 `config.json`
+2. 为每个版本的每个平台获取实时下载链接 → 更新 `../versions/` 中的版本文件
+
+### 步骤 3: 触发 Release 发布
 
 1. 进入 GitHub 仓库 → **Actions** 选项卡
 2. 选择 **"Download Multi-Platform and Release"**
@@ -67,24 +67,32 @@ Workflow 会自动：
 
 ## 📝 版本文件格式
 
-### 必需字段
+自动生成的版本文件位于 `versions/{buildVersion}.json`，格式如下：
 
-| 字段 | 说明 |
-|------|------|
-| `versionName` | 版本显示名称 |
-| `buildVersion` | 构建版本号 (Release 标签) |
-| `platforms` | 平台列表 |
+```json
+{
+  "versionName": "Command Line Tools 6.1.1 Beta1",
+  "buildVersion": "6.1.1.268",
+  "publishTime": "2026-04-30 01:17:18",
+  "versionId": "101777511964767025",
+  "platforms": {
+    "windows-x64": {
+      "showName": "Command Line Tools for Windows 6.1.1.268",
+      "packageName": "commandline-tools-windows-x64-6.1.1.268.zip",
+      "downloadUrl": "https://...",
+      "sha256": "40cc0d9d677406f6f8f2704107dcff89e36ed271ead357db5cef62501473f37e",
+      "packageSize": "2599585816",
+      "sdkId": "5cdf203ab5634a4cace4359c6034db7e",
+      "packageId": "101777511964767027"
+    },
+    "linux-x86": { ... },
+    "macos-x86": { ... },
+    "macos-arm64": { ... }
+  }
+}
+```
 
-### platforms 字段
-
-每个平台必须包含：
-
-| 字段 | 说明 |
-|------|------|
-| `showName` | 平台显示名称 |
-| `packageName` | 文件名称 |
-| `downloadUrl` | 下载链接 |
-| `sha256` | SHA256 校验和 |
+### 字段说明
 
 ### 支持的平台
 
