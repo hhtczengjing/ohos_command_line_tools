@@ -17,10 +17,39 @@ const VERSIONS_DIR = path.join(__dirname, '../versions');
 // 平台映射关系 - 根据 osType 映射
 const OS_TYPE_MAP = {
   1: 'windows-x64',
-  2: 'linux-x86',
-  3: 'macos-x86',
-  4: 'macos-arm64'
+  2: 'macos-x86',    // mac-x64 → macos-x86 (x64 指 Intel)
+  3: 'macos-arm64',
+  4: 'linux-x64'
 };
+
+// 根据 packageName 推断真实的平台
+function inferPlatformFromPackageName(packageName) {
+  if (!packageName) return null;
+  const lowerName = packageName.toLowerCase();
+  if (lowerName.includes('windows') || lowerName.includes('x64-win')) {
+    return 'windows-x64';
+  } else if (lowerName.includes('linux') && lowerName.includes('x86')) {
+    return 'linux-x86';
+  } else if (lowerName.includes('mac') && lowerName.includes('arm64')) {
+    return 'macos-arm64';
+  } else if (lowerName.includes('mac') && (lowerName.includes('x64') || lowerName.includes('x86'))) {
+    return 'macos-x86';
+  }
+  return null;
+}
+
+// 验证并纠正平台映射
+function getPlatformId(osType, packageName) {
+  const osTypeId = OS_TYPE_MAP[osType];
+  const inferredId = inferPlatformFromPackageName(packageName);
+
+  if (inferredId && inferredId !== osTypeId) {
+    console.warn(`   ⚠️  osType=${osType} 映射为 '${osTypeId}'，但 packageName 表明应该是 '${inferredId}'，使用推断结果`);
+    return inferredId;
+  }
+
+  return osTypeId;
+}
 
 // 从环境变量或配置文件读取 Cookie
 function getCookie() {
@@ -141,15 +170,8 @@ async function syncVersions() {
     // 遍历所有 versionTypeList（每个对应一个平台/osType）
     for (const versionType of versionTypeList) {
       const osType = versionType.osType;
-      const platformId = OS_TYPE_MAP[osType];
-
-      if (!platformId) {
-        console.warn(`⚠️  未知的 osType: ${osType}，跳过`);
-        continue;
-      }
-
       const versionList = versionType.versionList || [];
-      console.log(`📱 处理 osType=${osType} (${platformId}): ${versionList.length} 个版本`);
+      console.log(`📱 处理 osType=${osType}: ${versionList.length} 个版本`);
 
       for (const version of versionList) {
         const buildVersion = version.buildVersion;
@@ -169,6 +191,14 @@ async function syncVersions() {
         const packageList = version.packageList || [];
 
         for (const pkg of packageList) {
+          // 根据 osType 和 packageName 推断真实的平台
+          const platformId = getPlatformId(osType, pkg.packageName);
+
+          if (!platformId) {
+            console.warn(`   ⚠️  无法推断平台: osType=${osType}, packageName=${pkg.packageName}，跳过`);
+            continue;
+          }
+
           console.log(`   ⏳ 正在获取 ${platformId} 的下载 URL (${buildVersion})...`);
 
           try {
