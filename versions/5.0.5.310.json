@@ -7,11 +7,38 @@
     "windows-x64": {
       "showName": "Command Line Tools for Windows 5.0.5.310",
       "packageName": "commandline-tools-windows-x64-5.0.5.310.zip",
-      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/7b/v3/YUpqiCtOScq7QiIU4eUDBQ/commandline-tools-windows-x64-5.0.5.310.zip?HW-CC-KV=V1&HW-CC-Date=20260512T063431Z&HW-CC-Expire=315360000&HW-CC-Sign=934443C2AC3CC9D1B0EA3B45338FF25CA4F7C59891ED57A6E6E9F3BA4E647DCA",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/7b/v3/YUpqiCtOScq7QiIU4eUDBQ/commandline-tools-windows-x64-5.0.5.310.zip?HW-CC-KV=V1&HW-CC-Date=20260512T085330Z&HW-CC-Expire=315360000&HW-CC-Sign=1751C73D256FE67C4F22F25BF32A7BE9B047FE879E50A90DA8957F213B03EEC8",
       "sha256": "8885b272caeb29daac11a368c115e3fa21499de1f920941df9274d3e5b4e1a57",
       "packageSize": "2505490659",
       "sdkId": "3e9c5ffcd2ed4fb3b8740c0023d12e7c",
       "packageId": "101766718391214039"
+    },
+    "macos-arm64": {
+      "showName": "Command Line Tools for Linux(x86) 5.0.5.310",
+      "packageName": "commandline-tools-linux-x64-5.0.5.310.zip",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/f5/v3/9S75digfRDmH6pjQN2pAkA/commandline-tools-linux-x64-5.0.5.310.zip?HW-CC-KV=V1&HW-CC-Date=20260512T085338Z&HW-CC-Expire=315360000&HW-CC-Sign=FDFC96829E5DE7EB7727C6AF2340A61908DAFCBC884DB6892F945387FBE27261",
+      "sha256": "f5b4240807c24457294b6469c6d39c1c00b5d9e06c391852d633a5da7ff28c6d",
+      "packageSize": "3240302021",
+      "sdkId": "65600cf32de24daabaefd772e673482b",
+      "packageId": "101766718391214040"
+    },
+    "linux-x86": {
+      "showName": "Command Line Tools for Mac(x86) 5.0.5.310",
+      "packageName": "commandline-tools-mac-x64-5.0.5.310.zip",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/2/v3/mUE5vIhnTJGfKejQenaRfg/commandline-tools-mac-x64-5.0.5.310.zip?HW-CC-KV=V1&HW-CC-Date=20260512T085347Z&HW-CC-Expire=315360000&HW-CC-Sign=B15B9A3651E37E8310169EE7619ECC84195037AF70C907A0DB011A1A5BE5DE72",
+      "sha256": "75b6a7b1091275e3e6a36f03e0468706493cac69b3edec848d66b247c1da946f",
+      "packageSize": "2537631853",
+      "sdkId": "7982649285944b35b569ebc0e41b705f",
+      "packageId": "101766718391214041"
+    },
+    "macos-x86": {
+      "showName": "Command Line Tools for Mac(ARM) 5.0.5.310",
+      "packageName": "commandline-tools-mac-arm64-5.0.5.310.zip",
+      "downloadUrl": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/2d/v3/Sdx-iFfFT8atIdFNjVJpIg/commandline-tools-mac-arm64-5.0.5.310.zip?HW-CC-KV=V1&HW-CC-Date=20260512T085356Z&HW-CC-Expire=315360000&HW-CC-Sign=EF2CDC84786D47B34F5E145EDDE491945BCAAE34FE6968750C81B5390C284B58",
+      "sha256": "86ba794f9746f507fd20d0baa6ea7f5ed5b45a8a54299884064186e80ec246b7",
+      "packageSize": "2376520648",
+      "sdkId": "36b2b276da8d46ddb4d0076376e290ac",
+      "packageId": "101766718391214042"
     }
   }
 }
